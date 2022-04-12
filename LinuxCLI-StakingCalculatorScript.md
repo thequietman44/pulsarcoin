@@ -1,4 +1,4 @@
-### Staking Calculator Script Setup
+# Linux CLI - Staking Calculator Script
 
 1. Install two dependencies `jq` and `bc`:
 ```
