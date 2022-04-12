@@ -72,8 +72,8 @@ AVGPLSR=`echo "scale=4; $AVGBLOCKS * 90" | bc`
 
 echo "Your wallet has minted an average of $AVGBLOCKS blocks/day ($AVGPLSR PLSR/day) over the last $DAYS days."
 echo ""
-echo "DAYS      BLOCKS  BLOCKS/DAY      PLSR    PLSR/DAY"
-echo "$DAYS     $BLOCKS $AVGBLOCKS              $PLSR   $AVGPLSR"
+echo -e "DAYS\tBLOCKS\tBLOCKS/DAY\tPLSR\tPLSR/DAY"
+echo -e "$DAYS\t$BLOCKS\t$AVGBLOCKS\t\t$PLSR\t$AVGPLSR"
 
 ```
 5. Hit `Ctrl+O` and `Enter` to save your changes, then `Ctrl+X` to close the file.
