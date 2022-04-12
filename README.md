@@ -2,7 +2,7 @@
 
 A collection of files related to PulsarCoin (http://pulsarcoin.org).
 
-Check the sidebar for step-by-step instructions.
+Check the [Wiki](../../wiki) for step-by-step instructions.
 
 
 ## Script Examples
