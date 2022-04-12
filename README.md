@@ -9,7 +9,7 @@ Check the sidebar for step-by-step instructions.
 ### Push Notifications
 Get a push notification on your phone or desktop when your CLI wallet mints a new staking block.
 
-!(images/pulsar_push.png)
+<img src="images/pulsar_push.png" width="300">
 
 ### Staking Calculator
 Easily calculate your total and average staking blocks/PLSR for a given number of days.
