@@ -69,8 +69,15 @@ BLOCKS=`$PULSARDIR/pulsar-cli listtransactions "*" 100000 | jq '.[] | select(.ca
 AVGBLOCKS=`echo "scale=2; $BLOCKS / $DAYS" | bc`
 PLSR=`expr $BLOCKS \* 90`
 AVGPLSR=`echo "scale=4; $AVGBLOCKS * 90" | bc`
+BALANCE=`$PULSARDIR/pulsar-cli getwalletinfo | jq '.balance'`
+STARTBALANCE=`echo "scale=4; $BALANCE - ($BLOCKS * 90)" | bc`
+MEDBALANCE=`echo "scale=4; $BALANCE - ($BLOCKS * 90 / 2)" | bc`
+BLOCKSPER10K=`echo "scale=4; $BLOCKS / ($MEDBALANCE / 10000)" | bc`
+BLOCKSPERDAYPER10K=`echo "scale=2; $BLOCKSPER10K / $DAYS" | bc`
+PLSRPERDAYPER10K=`echo "scale=2; $BLOCKSPERDAYPER10K * 90" | bc`
 
 echo "Your wallet has minted an average of $AVGBLOCKS blocks/day ($AVGPLSR PLSR/day) over the last $DAYS days."
+echo "Normalized to $BLOCKSPERDAYPER10K blocks/day ($PLSRPERDAYPER10K PLSR/day) for every 10k PLSR (assuming no deposits other than staking rewards)."
 echo ""
 echo -e "DAYS\tBLOCKS\tBLOCKS/DAY\tPLSR\tPLSR/DAY"
 echo -e "$DAYS\t$BLOCKS\t$AVGBLOCKS\t\t$PLSR\t$AVGPLSR"
