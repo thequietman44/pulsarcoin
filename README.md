@@ -18,9 +18,10 @@ Example output:
 ```
 ./pulsar_staking_calc.sh --days 1000
 
-Wallet age (34 days) is less than 1000, using 34 days instead...
-Your wallet has minted an average of 2.05 blocks/day (184.50 PLSR/day) over the last 34 days.
+Wallet age (36 days) is less than 1000, using 36 days instead...
+Your wallet has minted an average of 1.38 blocks/day (124.20 PLSR/day) over the last 36 days.
+Normalized to .75 blocks/day (67.50 PLSR/day) for every 10k PLSR (assuming no deposits other than staking rewards).
 
 DAYS    BLOCKS  BLOCKS/DAY      PLSR    PLSR/DAY
-34      70      2.05            6300    184.50
+36      50      1.38            4500    124.20
 ```
