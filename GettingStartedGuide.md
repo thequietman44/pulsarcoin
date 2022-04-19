@@ -4,7 +4,7 @@ If you have any questions about PulsarCoin (PLSR) that are not answered on the w
 
 ## 1. Get the Pulsar Wallet
 
-Before you can acquire PLSR you need a place to store it. See the [Windows wallet setup guide](WindowsGUI-WalletSetup.md) or the [Linux CLI wallet setup guide](LinuxCLI-WalletStakingSetup) for step-by-step instructions to install the Pulsar wallet and get an address to deposit your PLSR.
+Before you can acquire PLSR you need a place to store it. See the [Windows wallet setup guide](WindowsGUI-WalletSetup.md) or the [Linux CLI wallet setup guide](LinuxCLI-WalletStakingSetup.md) for step-by-step instructions to install the Pulsar wallet and get an address to deposit your PLSR.
 
 Another option is to sign up for an online [Beehive Wallet](https://beehivewallet.link/index) to store and stake your PLSR. While the official Pulsar wallet is recommended, Beehive Wallet is a convenient option for those who plan to stake and hold PLSR.
 
