@@ -1,4 +1,4 @@
-## Linux CLI Wallet and Staking
+# Linux CLI Wallet and Staking
 
  1. Download the latest Pulsar Linux release and extract:
  ```

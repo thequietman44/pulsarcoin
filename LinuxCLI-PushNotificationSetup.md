@@ -1,10 +1,10 @@
-## Linux CLI Wallet - Push Notifications for Staking
+# Linux CLI Wallet - Push Notifications for Staking
 
-### Requirements
+## Requirements
 You will need a free Pushover account (https://pushover.net/) for the push notifications. Any other push service API could also work, but for the purposes of this guide we'll use Pushover.
 You will need your "User Key" and an "API Token/Key" from your Pushover account. You will also need at least 1 device registered with Pushover to receive push notifications, details can be found in Pushover's documentation.
 
-### Pushover Script Setup 
+## Pushover Script Setup 
  
 1. Install `wget` if it's not already installed:
 ```
@@ -48,7 +48,7 @@ pushover "This is a test message"
 **Note:** You can now use the `pushover` command to send push notifications from any script or terminal on this PC.
 
 
-### Staking Reward Script Setup
+## Staking Reward Script Setup
 
 1. Install one dependency `jq`:
 ```
@@ -120,7 +120,7 @@ chmod +x pulsar_wallet_push.sh
 ```
 8. If you already had staking rewards you should see push notifications for each of them now. Otherwise you should only see the message with the wallet unlock timeout info.
 
-### Cron Job Setup
+## Cron Job Setup
 
 1. Edit your crontab file:
 ```
