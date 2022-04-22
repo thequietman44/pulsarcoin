@@ -89,3 +89,5 @@
      <img src="images/win-gui-receive2.png" width="500">
 
  20. You now have a working and secured Pulsar wallet!
+
+ **NOTE**: It's **critical** to keep a backup of your `wallet.dat` file! This file contains your private keys and without them you will lose acess to any PLSR stored in your wallet. See the [Backup Guide](WindowsGUI-Troubleshooting.md#back-up-your-wallet) for instructions.

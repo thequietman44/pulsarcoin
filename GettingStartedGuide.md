@@ -8,6 +8,8 @@ Before you can acquire PLSR you need a place to store it. See the [Windows walle
 
 Another option is to sign up for an online [Beehive Wallet](https://beehivewallet.link/index) to store and stake your PLSR. While the official Pulsar wallet is recommended, Beehive Wallet is a convenient option for those who plan to stake and hold PLSR.
 
+**NOTE**: It's critical to keep a backup of your `wallet.dat` file. This file contains your private keys and without them you will lose acess to any PLSR stored in your wallet. See the [Windows Backup Guide](WindowsGUI-Troubleshooting.md#back-up-your-wallet) for instructions.
+
 ## 2. Buy or Mine Your First PLSR
 
 The fastest way to acquire your first PLSR is to buy it. [Exbitron](https://www.exbitron.com) offers BTC, LTC, and BUSD trading pairs.

@@ -4,7 +4,7 @@ Below are some of the most common troubleshooting steps you may be asked to do i
 
 ## Back Up Your Wallet
 
-**NOTE**: It's recommended that you encrypt your wallet. Unencrypted wallet files can be opened by anyone or anything with access to your system or backup media. See the [Windows GUI Wallet Setup guide](WindowsGUI-WalletSetup.md) for instructions.
+**NOTE**: It's recommended that you encrypt your wallet. Unencrypted wallet files can be opened by anyone or anything with access to your system or backup media. See the [Windows GUI Wallet Setup guide](WindowsGUI-WalletSetup.md) for instructions, then continue here once it's encrypted.
 
 1. In the Pulsar wallet go to File > Backup wallet...
 
