@@ -24,13 +24,7 @@ PULSARDIR=~
 SAT_IPs=`$PULSARDIR/pulsar-cli getpeerinfo | jq -r '.[] | select(.subver | startswith("/Satoshi")) | .addr'`
 
 # Also get the IP of peers running older wallet versions
-OLD100_IPs=`$PULSARDIR/pulsar-cli getpeerinfo | jq -r '.[] | select(.subver | startswith("/Pulsar:1.0")) | .addr'`
-OLD110_IPs=`$PULSARDIR/pulsar-cli getpeerinfo | jq -r '.[] | select(.subver | startswith("/Pulsar:1.1.0")) | .addr'`
-OLD111_IPs=`$PULSARDIR/pulsar-cli getpeerinfo | jq -r '.[] | select(.subver | startswith("/Pulsar:1.1.1")) | .addr'`
-OLD112_IPs=`$PULSARDIR/pulsar-cli getpeerinfo | jq -r '.[] | select(.subver | startswith("/Pulsar:1.1.2")) | .addr'`
-# Combine the lists into one
-OLD_IPs=`echo $OLD100_IPs $OLD110_IPs $OLD111_IPs $OLD112_IPs`
-
+OLD_IPs=`$PULSARDIR/pulsar-cli getpeerinfo | jq -r '.[] | select(.subver | (startswith("/Pulsar:1.1.3")) | not) | .addr'`
 
 # Function to ban IPv4 and IPv6 addresses
 ban_ips () {
@@ -45,7 +39,7 @@ ban_ips () {
         fi
 
         echo "$PULSARDIR/pulsar-cli setban \"$PARSED_IP\" \"add\" 604800"
-        $PULSARDIR/pulsar-cli setban "$PARSED_IP" "add" 604800
+        #$PULSARDIR/pulsar-cli setban "$PARSED_IP" "add" 604800
     done
 }
 
