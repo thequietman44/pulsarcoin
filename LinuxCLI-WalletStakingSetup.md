@@ -28,7 +28,7 @@ or
 ```
 6. You can unlock your wallet for staking only with the following command:
 ```
-./pulsar-cli walletpassphrase "YOUR PASSPHRASE HERE" 960000 true
+./pulsar-cli walletpassphrase "YOUR PASSPHRASE HERE" 96000000 true
 ```
 7. You can view the status of your wallet with this command:
 ```
