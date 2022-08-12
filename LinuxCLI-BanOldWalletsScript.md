@@ -17,18 +17,37 @@ nano ban_old_wallets.sh
 ```
 #!/bin/bash
 
+######### User variables, edit as needed #########
 # Paths, change if you chose different names/locations
 PULSARDIR=~
+
+# Whitelist of IPs or addresses that should never be banned (separated by spaces)
+WHITELIST="pulsarcoin.org"
+
+# Current wallet version string, ban any peers not running this version
+WALLET_SUBVER="/Pulsar:1.1.3"
+
+# Experimental, ping latency in ms
+PING_MS=200 # Peers with minimum ping latency greater than this many milliseconds will be banned
+
+######### End user variables ##########
+
 
 # Get a list of peers, return the IP of any peers whose subver string starts with "/Satoshi"
 SAT_IPs=`$PULSARDIR/pulsar-cli getpeerinfo | jq -r '.[] | select(.subver | startswith("/Satoshi")) | .addr'`
 
 # Also get the IP of peers running older wallet versions
-OLD_IPs=`$PULSARDIR/pulsar-cli getpeerinfo | jq -r '.[] | select(.subver | (startswith("/Pulsar:1.1.3")) | not) | .addr'`
+OLD_IPs=`$PULSARDIR/pulsar-cli getpeerinfo | jq --arg subverstring "$WALLET_SUBVER" -r '.[] | select(.subver | (startswith($subverstring)) | not) | .addr'`
+
+# Experimental, get list of IPs with ping latency above specified threshold in ms
+PING=`echo "scale=4; $PING_MS / 1000" | bc`
+SLOW_IPs=`$PULSARDIR/pulsar-cli getpeerinfo | jq --arg ping "$PING" -r '.[] | select(.minping>=($ping|tonumber)) | .addr'`
 
 # Function to ban IPv4 and IPv6 addresses
 ban_ips () {
     for IP in $1; do
+
+        SKIP_IP=0
 
         if [[ $IP =~ "[" ]]; then
             # If IP contains brackets it's IPv6, return address inside brackets
@@ -38,8 +57,19 @@ ban_ips () {
             PARSED_IP=`echo $IP | awk -F: '{ print $1 }'`
         fi
 
-        echo "$PULSARDIR/pulsar-cli setban \"$PARSED_IP\" \"add\" 604800"
-        #$PULSARDIR/pulsar-cli setban "$PARSED_IP" "add" 604800
+        for i in $WHITELIST; do
+            if [[ $PARSED_IP == *"$i"* ]]; then
+                echo "I found a whitelisted IP $PARSED_IP, skipping..."
+                SKIP_IP=1
+            fi
+        done
+
+        # If SKIP_IP hasn't been set to 1 (true) proceed with banning the IP
+        if [ $SKIP_IP = 0 ]; then
+            echo "$PULSARDIR/pulsar-cli setban \"$PARSED_IP\" \"add\" 604800"
+            $PULSARDIR/pulsar-cli setban "$PARSED_IP" "add" 604800
+        fi
+
     done
 }
 
@@ -66,6 +96,17 @@ if [ ! -z "$OLD_IPs" ]; then
 
 else
     echo "No old nodes found."
+fi
+
+if [ ! -z "$SLOW_IPs" ]; then
+    echo "Slow nodes found:"
+    echo $SLOW_IPs
+    echo ""
+
+    #ban_ips "$SLOW_IPs"
+
+else
+    echo "No slow nodes found."
 fi
 ```
 5. Hit `Ctrl+O` and `Enter` to save your changes, then `Ctrl+X` to close the file.
