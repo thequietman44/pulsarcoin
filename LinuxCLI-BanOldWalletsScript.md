@@ -27,11 +27,16 @@ WHITELIST="pulsarcoin.org"
 # Current wallet version string, ban any peers not running this version
 WALLET_SUBVER="/Pulsar:1.1.3"
 
+# Ban period in days
+BANDAYS=7
+
 # Experimental, ping latency in ms
 PING_MS=200 # Peers with minimum ping latency greater than this many milliseconds will be banned
 
 ######### End user variables ##########
 
+# Convert days to seconds
+BANLENGTH=`echo "scale=0; $BANDAYS * 86400" | bc`
 
 # Get a list of peers, return the IP of any peers whose subver string starts with "/Satoshi"
 SAT_IPs=`$PULSARDIR/pulsar-cli getpeerinfo | jq -r '.[] | select(.subver | startswith("/Satoshi")) | .addr'`
@@ -66,22 +71,20 @@ ban_ips () {
 
         # If SKIP_IP hasn't been set to 1 (true) proceed with banning the IP
         if [ $SKIP_IP = 0 ]; then
-            echo "$PULSARDIR/pulsar-cli setban \"$PARSED_IP\" \"add\" 604800"
-            $PULSARDIR/pulsar-cli setban "$PARSED_IP" "add" 604800
+            echo "$PULSARDIR/pulsar-cli setban \"$PARSED_IP\" \"add\" $BANLENGTH"
+            $PULSARDIR/pulsar-cli setban "$PARSED_IP" "add" $BANLENGTH
         fi
 
     done
 }
 
 
-# If any IPs were returned, ban them for 1 week
+# If any IPs were returned, ban them
 if [ ! -z "$SAT_IPs" ]; then
     echo "Satoshi nodes found:"
     echo $SAT_IPs
     echo ""
-
     ban_ips "$SAT_IPs"
-
 else
     echo "No Satoshi nodes found."
 fi
@@ -91,9 +94,7 @@ if [ ! -z "$OLD_IPs" ]; then
     echo "Old nodes found:"
     echo $OLD_IPs
     echo ""
-
     ban_ips "$OLD_IPs"
-
 else
     echo "No old nodes found."
 fi
@@ -102,9 +103,7 @@ if [ ! -z "$SLOW_IPs" ]; then
     echo "Slow nodes found:"
     echo $SLOW_IPs
     echo ""
-
     #ban_ips "$SLOW_IPs"
-
 else
     echo "No slow nodes found."
 fi
